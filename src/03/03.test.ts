@@ -2,7 +2,7 @@
 import { CityType } from "./03_types";
 import {
     addMoneyToBudget,
-    createMessage,
+    createMessage, demolishHousesOnTheStreet,
     repairHouse,
     toFireStaff,
     toHireStaff
@@ -16,6 +16,7 @@ beforeEach(() => {
         title: 'New York',
         houses: [
             {
+                id: 1,
                 buildedAt: 2012,
                 repaired: false,
                 address: {
@@ -26,6 +27,7 @@ beforeEach(() => {
                 }
             },
             {
+                id: 2,
                 buildedAt: 2008,
                 repaired: false,
                 address: {
@@ -36,6 +38,7 @@ beforeEach(() => {
                 }
             },
             {
+                id: 3,
                 buildedAt: 2020,
                 repaired: false,
                 address: {
@@ -86,6 +89,15 @@ test('Budget should be changed for FIRE-STATION', () => {
     addMoneyToBudget(city.governmentBuildings[1], -100000)
 
     expect(city.governmentBuildings[1].budget).toBe(400000);
+})
+
+// 01. Дополните тиип HouseType (добавьте порядковый id от 1 и по возрастанию)
+// 02. создайте в том же файле еще одну функцию, чтобы тесты прошли
+test('Houses should be destroyed', () => {
+    demolishHousesOnTheStreet(city, "Happy street")
+
+    expect(city.houses.length).toBe(1);
+    expect(city.houses[0].id).toBe(1);
 })
 
 
