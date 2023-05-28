@@ -1,4 +1,12 @@
-import { LaptopPerson, makeHairdresser, moveUser, PersonType, updateLaptopName } from "./10";
+import {
+    addBooksToUser,
+    LaptopPerson,
+    makeHairdresser,
+    moveUser,
+    PersonType,
+    updateLaptopName,
+    UserBooksType
+} from "./10";
 
 test('change haircut', () => {
 
@@ -64,4 +72,29 @@ test('upgrade user laptop to Macbook', () => {
     expect(person.laptop.title).toBe('Acer')
     expect(copy.laptop.title).toBe('MackBook')
 
+})
+
+
+test('add to new boors to user', () => {
+
+    const person: LaptopPerson & UserBooksType = {
+        name: 'Alex',
+        hear: 32,
+        address: {
+            city: 'Minsk'
+        },
+        laptop: {
+            title: 'Acer'
+        },
+        books: ['html', 'js', 'react']
+    }
+
+    const copy = addBooksToUser(person, ['ts', 'redux'])
+
+    expect(person).not.toBe(copy)
+    expect(person.laptop).toBe(copy.laptop)
+    expect(person.laptop.title).toBe('Acer')
+    expect(person.books).not.toBe(copy.books)
+    expect(person.books.length).toBe(3)
+    expect(copy.books.length).toBe(5)
 })

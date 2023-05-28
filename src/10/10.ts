@@ -11,7 +11,12 @@ export type Laptop = {
 }
 
 export type LaptopPerson = PersonType & {
-    laptop : Laptop
+    laptop: Laptop
+}
+
+
+export type UserBooksType = {
+    books: string[]
 }
 
 
@@ -41,3 +46,15 @@ export function updateLaptopName(person: LaptopPerson, laptopInfo: string) {
         },
     }
 }
+
+export function addBooksToUser(person: LaptopPerson & UserBooksType, books: string[]) {
+
+    return {
+        ...person,
+        books: [
+            ...person.books,
+            ...books
+        ],
+    }
+}
+
